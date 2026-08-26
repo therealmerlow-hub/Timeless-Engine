@@ -1,0 +1,1 @@
+Timeless Engine / T-Slice is an engine with Psych mods system and v-slice visuals. Timeless Engine will have a lot of custom features and editors in the future. Timeless Engine now has only 1  developer, if you wanna help with developing - DM owner in Discord. Link - https://discord.com/users/1347569284947382272
