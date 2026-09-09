@@ -200,6 +200,19 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 			BOOL);
 		addOption(option);
 
+		var option:Option = new Option('Timeless Menu BG',
+				'If checked, replaces the default menu background with the custom Timeless Engine background',
+				'timelessMenuBG',
+				'bool');
+		addOption(option);
+
+		var option:Option = new Option('Corruption Mode',
+				'Forces the game into the secret corrupted gamemode.',
+				'corruptionCheat',
+				'bool');
+		addOption(option);
+
+
 		super();
 		add(notes);
 		add(splashes);

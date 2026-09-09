@@ -234,6 +234,20 @@ class Character extends FlxSprite
 			return;
 		}
 
+		if (PlayState.instance != null && PlayState.instance.camGame != null && !debugMode)
+		{
+				// Проверяем, попадает ли хитбокс персонажа в границы экрана камеры camGame
+				if (!isOnScreen())
+				{
+						// Если персонаж поет (sing), мы НЕ замораживаем его, чтобы не сломать тайминги удержания нот!
+						if (getAnimationName() == null || !getAnimationName().startsWith('sing'))
+						{
+								super.update(elapsed); // Выполняем базовое обновление позиции, но анимацию пропускаем
+								return;
+						}
+				}
+		}
+
 		if(heyTimer > 0)
 		{
 			var rate:Float = (PlayState.instance != null ? PlayState.instance.playbackRate : 1.0);

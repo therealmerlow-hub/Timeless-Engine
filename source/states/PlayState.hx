@@ -417,22 +417,67 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
+		if (backend.ClientPrefs.data.corruptionCheat) {
+				if (SONG.player2 == 'senpai' || SONG.player2 == 'senpai-angry' || SONG.player2 == 'senpai-glitch' || SONG.player2 == 'senpai-mad' || SONG.player2 == 'spirit') {
+						stageData.hide_girlfriend = true;
+				}
+		}
+
 		if (!stageData.hide_girlfriend)
 		{
 			if (SONG.gfVersion == null || SONG.gfVersion.length < 1)
 				SONG.gfVersion = 'gf'; // Fix for the Chart Editor
-			gf = new Character(0, 0, SONG.gfVersion);
+
+			var targetGF:String = SONG.gfVersion;
+			if (backend.ClientPrefs.data.corruptionCheat) {
+					targetGF = 'gf-pico';
+			}
+			gf = new Character(0, 0, targetGF);
 			startCharacterPos(gf);
 			gfGroup.scrollFactor.set(1, 1);
 			gfGroup.add(gf);
 		}
 
-		dad = new Character(0, 0, SONG.player2);
+		var targetDad:String = SONG.player2;
+		if (backend.ClientPrefs.data.corruptionCheat) {
+				switch (targetDad) {
+						case 'senpai':
+								targetDad = 'senpai-glitch';	
+						case 'senpai-angry':
+								targetDad = 'senpai-mad';	
+						case 'spirit':
+								targetDad = 'bf-glitch-alt';
+						case 'mom-car':
+								targetDad = 'mom-4';	
+						case 'dad':
+								targetDad = 'dad-evil';	
+						case 'darnell':
+								targetDad = 'darnell-2';
+						case 'pico':
+								targetDad = 'pico-2';
+						case 'spooky':
+								targetDad = 'spooky-2';
+				}
+		}
+		dad = new Character(0, 0, targetDad);
+
 		startCharacterPos(dad, true);
 		dadGroup.add(dad);
 		
 
 	var targetBF:String = SONG.player1;
+
+		if (backend.ClientPrefs.data.corruptionCheat) {
+				if (SONG.player2 == 'senpai' || SONG.player2 == 'senpai-angry' || SONG.player2 == 'senpai-glitch' || SONG.player2 == 'senpai-mad' || SONG.player2 == 'spirit' || SONG.player2 == 'bf-glitch-alt') {
+						targetBF = 'bf-pixel3';
+				} 
+				else if (SONG.player1 == 'pico' || SONG.player1 == 'pico-playable' || SONG.player1 == 'pico-player') {
+						targetBF = 'pico-Playable';
+				} 
+				else {
+						targetBF = 'bf-pico3';
+				}
+		}
 
 		boyfriend = new Character(0, 0, targetBF, true);
 		startCharacterPos(boyfriend);
@@ -1012,6 +1057,10 @@ class PlayState extends MusicBeatState
 
 	function startAndEnd()
 	{
+		if (backend.ClientPrefs.data.corruptionCheat) {
+				startCountdown();
+				return;
+		}
 		if (endingSong)
 			endSong();
 		else
@@ -2329,6 +2378,11 @@ function doDeathCheck(?skipHealthCheck:Bool = false)
 			#end
 
 			persistentUpdate = false;
+
+			if (backend.ClientPrefs.data.corruptionCheat && (boyfriend.curCharacter == 'pico-Playable' || boyfriend.curCharacter == 'pico-playable')) {
+					SONG.gameOverChar = 'pico-dead';
+			}
+
 			persistentDraw = false;
 			FlxTimer.globalManager.clear();
 			FlxTween.globalManager.clear();
@@ -2802,6 +2856,12 @@ public var transitioning = false;
 
 public function endSong()
 {
+
+	if (backend.ClientPrefs.data.corruptionCheat) {
+			inCutscene = false;
+			startVideo('null');
+	}
+
 	#if TOUCH_CONTROLS_ALLOWED
 	hitbox.visible = #if !android touchPad.visible = #end false;
 	#end
@@ -3769,6 +3829,8 @@ public function goodNoteHit(note:Note):Void
 			if (leType == 'Glitch Note') {
 			health -= 1.5;
 			FlxG.camera.shake(0.01, 0.4);
+
+			FlxG.sound.play(Paths.sound('glitchhit'));
 
 			if (camHUD != null) {
 				camHUD.shake(0.02, 0.3);

@@ -26,11 +26,13 @@ import states.InitState;
 	public var lastFreeplayMod:String = '||bf';
 
 	public var downScroll:Bool = false;
+	public var corruptionCheat:Bool = false;
+	public var timelessMenuBG:Bool = false;
 	public var middleScroll:Bool = false;
 	public var sickOnly:Bool = false;
 	public var crashOnMiss:Bool = false;
 	public var healthDrain:Bool = false;
-	public var glitchNotesModifier:Float = 0.1;
+	public var glitchNotesModifier:Float = 0;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
 	public var showFPSOpacity:Float = 0.6;
