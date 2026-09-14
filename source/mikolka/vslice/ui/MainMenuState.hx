@@ -12,11 +12,11 @@ class MainMenuState extends MusicBeatState
 	public var cheatBuffer:String = "";
 
 	#if !LEGACY_PSYCH
-	public static var psychEngineVersion:String = '0.0.3'; // This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.0.4'; // This is also used for Discord RPC
 	#else
-	public static var psychEngineVersion:String = '0.0.3'; // This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.0.4'; // This is also used for Discord RPC
 	#end
-	public static var pSliceVersion:String = '0.0.3';
+	public static var pSliceVersion:String = '0.0.4';
 	public static var funkinVersion:String = '0.7.6'; // Version of funkin' we are emulationg
 
 	var bg:FlxSprite;
