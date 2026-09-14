@@ -417,67 +417,22 @@ class PlayState extends MusicBeatState
 		add(luaDebugGroup);
 		#end
 
-		if (backend.ClientPrefs.data.corruptionCheat) {
-				if (SONG.player2 == 'senpai' || SONG.player2 == 'senpai-angry' || SONG.player2 == 'senpai-glitch' || SONG.player2 == 'senpai-mad' || SONG.player2 == 'spirit') {
-						stageData.hide_girlfriend = true;
-				}
-		}
-
 		if (!stageData.hide_girlfriend)
 		{
 			if (SONG.gfVersion == null || SONG.gfVersion.length < 1)
 				SONG.gfVersion = 'gf'; // Fix for the Chart Editor
 
 			var targetGF:String = SONG.gfVersion;
-			if (backend.ClientPrefs.data.corruptionCheat) {
-					targetGF = 'gf-pico';
-			}
 			gf = new Character(0, 0, targetGF);
 			startCharacterPos(gf);
 			gfGroup.scrollFactor.set(1, 1);
 			gfGroup.add(gf);
 		}
 
-		var targetDad:String = SONG.player2;
-		if (backend.ClientPrefs.data.corruptionCheat) {
-				switch (targetDad) {
-						case 'senpai':
-								targetDad = 'senpai-glitch';	
-						case 'senpai-angry':
-								targetDad = 'senpai-mad';	
-						case 'spirit':
-								targetDad = 'bf-glitch-alt';
-						case 'mom-car':
-								targetDad = 'mom-4';	
-						case 'dad':
-								targetDad = 'dad-evil';	
-						case 'darnell':
-								targetDad = 'darnell-2';
-						case 'pico':
-								targetDad = 'pico-2';
-						case 'spooky':
-								targetDad = 'spooky-2';
-				}
-		}
 		dad = new Character(0, 0, targetDad);
 
 		startCharacterPos(dad, true);
 		dadGroup.add(dad);
-		
-
-	var targetBF:String = SONG.player1;
-
-		if (backend.ClientPrefs.data.corruptionCheat) {
-				if (SONG.player2 == 'senpai' || SONG.player2 == 'senpai-angry' || SONG.player2 == 'senpai-glitch' || SONG.player2 == 'senpai-mad' || SONG.player2 == 'spirit' || SONG.player2 == 'bf-glitch-alt') {
-						targetBF = 'bf-pixel3';
-				} 
-				else if (SONG.player1 == 'pico' || SONG.player1 == 'pico-playable' || SONG.player1 == 'pico-player') {
-						targetBF = 'pico-Playable';
-				} 
-				else {
-						targetBF = 'bf-pico3';
-				}
-		}
 
 		boyfriend = new Character(0, 0, targetBF, true);
 		startCharacterPos(boyfriend);
@@ -2378,11 +2333,6 @@ function doDeathCheck(?skipHealthCheck:Bool = false)
 			#end
 
 			persistentUpdate = false;
-
-			if (backend.ClientPrefs.data.corruptionCheat && (boyfriend.curCharacter == 'pico-Playable' || boyfriend.curCharacter == 'pico-playable')) {
-					SONG.gameOverChar = 'pico-dead';
-			}
-
 			persistentDraw = false;
 			FlxTimer.globalManager.clear();
 			FlxTween.globalManager.clear();

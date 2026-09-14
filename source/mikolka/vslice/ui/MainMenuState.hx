@@ -154,7 +154,7 @@ class MainMenuState extends MusicBeatState
 												if (backend.ClientPrefs.data.corruptionCheat) {
 														backend.ClientPrefs.data.corruptionCheat = false;
 														FlxG.camera.flash(0xFFFFFFFF, 0.5);
-														FlxG.sound.play(Paths.sound('glitchhit'), 1.0);
+														FlxG.sound.play(Paths.sound('glitchhit'), 2.0);
 														if (backend.ClientPrefs.data.timelessMenuBG) {
 																if (bg != null) bg.loadGraphic(Paths.image('TimelessBG'));
 																if (magenta != null) magenta.loadGraphic(Paths.image('TimelessBG'));
